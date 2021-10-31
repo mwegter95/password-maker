@@ -2,8 +2,8 @@
 var lowercase = "abcdefghijklmnopqrstuvwxyz"
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 var specialChars = "@#$%^&*"
+var numerics = "1234567890"
 var finalString = ""
-console.log(finalString)
 var passwordLength = ""
 var finalPassword = ""
 var numberOfOptionsSelected = 0
@@ -36,7 +36,7 @@ var pwdLengthFinal = passwordLength - numberOfOptionsSelected;
     finalPassword += finalPasswordArray[i];
   }
 
-  console.log(finalPassword)
+  console.log(finalPassword);
   return (finalPassword);
 }
 
@@ -44,21 +44,23 @@ var pwdLengthFinal = passwordLength - numberOfOptionsSelected;
 function writePassword() {
   var passwordText = document.querySelector("#password");
 
-  // reset password box in case generator is used multiple times
-  console.log(passwordText.value);
-  passwordText.value = "";
-  console.log(passwordText.value);
+  // reset the variables so generator can be used multiple times without refreshing
+  finalString = ""
+  passwordLength = ""
   finalPassword = ""
+  numberOfOptionsSelected = 0
 
 
+// run the function to prompt the user for option selections and generate password
   var password = promptPassword();
   
-
+// make the text on the page equal the generated password
   passwordText.value = password;
 
 }
 
 
+// prompt user for selections on characters to include in the password, add those characters to the finalString element to be chosen randomly from, and add one of each option chosen to finalPassword to ensure at least one is included in generated password
 function promptPassword() {
   passwordLength = window.prompt("How many characters long would you like your password? (8 - 126)")
   if (passwordLength < 8) {
@@ -78,6 +80,7 @@ function promptPassword() {
   var lowCase = window.prompt("For your password, would you like lowercase letters to be included? (y/n)");
   var upCase = window.prompt("For your password would you like uppercase letters to be included (y/n)");
   var specials = window.prompt("For your password, would you like special characters to be included? (y/n)");
+  var nums = window.prompt("For your password, would you like numbers to be included? (y/n)");
 
  
 
@@ -86,22 +89,27 @@ function promptPassword() {
     numberOfOptionsSelected += 1;
     finalPassword = finalPassword + lowercase[Math.floor(Math.random() * lowercase.length)];
     console.log(finalPassword);
-
-
   }
   
   if (upCase == "y") {
     finalString = finalString + uppercase;
     numberOfOptionsSelected += 1;
     finalPassword = finalPassword + uppercase[Math.floor(Math.random() * uppercase.length)];
-    console.log(finalPassword)
+    console.log(finalPassword);
   }
 
   if (specials == "y") {
     finalString = finalString + specialChars;
     numberOfOptionsSelected += 1;
     finalPassword = finalPassword + specialChars[Math.floor(Math.random() * specialChars.length)];
-    console.log(finalPassword)
+    console.log(finalPassword);
+  }
+
+  if (nums == "y") {
+    finalString = finalString + numerics;
+    numberOfOptionsSelected += 1;
+    finalPassword = finalPassword + numerics[Math.floor(Math.random() * numerics.length)];
+    console.log(finalPassword);
   }
   
   console.log(finalString);
@@ -110,7 +118,7 @@ function promptPassword() {
 
 }
 
-// shuffle function sourced from comment on this page https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+// shuffle function for randomizing the password array sourced from comment on this page https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
   let currentIndex = array.length,  randomIndex;
 
