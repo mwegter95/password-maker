@@ -14,14 +14,30 @@ var generateBtn = document.querySelector("#generate");
 // calculate password from chosen options and length
 function calculatePassword(letters) {
 console.log(passwordLength)
-  for (var i = 0; i < Number(passwordLength); i++) {
+var pwdLengthFinal = passwordLength - numberOfOptionsSelected;
+  for (var i = 0; i < Number(pwdLengthFinal); i++) {
     var pwd = letters[Math.floor(Math.random() * letters.length)];
     console.log(pwd);
     
     finalPassword += pwd;
   }
   console.log(finalPassword);
-  return finalPassword;
+
+  finalPasswordArray = [];
+  for (i=0; i<finalPassword.length; i++) {
+    finalPasswordArray[i] = finalPassword[i];
+  }
+
+  shuffle(finalPasswordArray);
+  console.log(finalPasswordArray);
+  
+  finalPassword = "";
+  for (i=0; i<finalPasswordArray.length; i++) {
+    finalPassword += finalPasswordArray[i];
+  }
+
+  console.log(finalPassword)
+  return (finalPassword);
 }
 
 // Write password to the #password input
@@ -76,10 +92,16 @@ function promptPassword() {
   
   if (upCase == "y") {
     finalString = finalString + uppercase;
+    numberOfOptionsSelected += 1;
+    finalPassword = finalPassword + uppercase[Math.floor(Math.random() * uppercase.length)];
+    console.log(finalPassword)
   }
 
   if (specials == "y") {
     finalString = finalString + specialChars;
+    numberOfOptionsSelected += 1;
+    finalPassword = finalPassword + specialChars[Math.floor(Math.random() * specialChars.length)];
+    console.log(finalPassword)
   }
   
   console.log(finalString);
@@ -88,9 +110,24 @@ function promptPassword() {
 
 }
 
+// shuffle function sourced from comment on this page https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
 
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
 
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
 
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+} 
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
