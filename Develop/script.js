@@ -6,6 +6,7 @@ var finalString = ""
 console.log(finalString)
 var passwordLength = ""
 var finalPassword = ""
+var numberOfOptionsSelected = 0
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -28,7 +29,11 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   // reset password box in case generator is used multiple times
-  passwordText.value = ""
+  console.log(passwordText.value);
+  passwordText.value = "";
+  console.log(passwordText.value);
+  finalPassword = ""
+
 
   var password = promptPassword();
   
@@ -61,15 +66,20 @@ function promptPassword() {
  
 
   if (lowCase == "y") {
-    finalString = finalString + lowercase
+    finalString = finalString + lowercase;
+    numberOfOptionsSelected += 1;
+    finalPassword = finalPassword + lowercase[Math.floor(Math.random() * lowercase.length)];
+    console.log(finalPassword);
+
+
   }
   
   if (upCase == "y") {
-    finalString = finalString + uppercase
+    finalString = finalString + uppercase;
   }
 
   if (specials == "y") {
-    finalString = finalString + specialChars
+    finalString = finalString + specialChars;
   }
   
   console.log(finalString);
