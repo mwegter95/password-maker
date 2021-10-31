@@ -139,3 +139,7 @@ function shuffle(array) {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
+
+// thank you to Divya M C M for general inspiration and layout, from their breakdown here: https://medium.com/@divyamcm/password-generator-using-html-css-and-javascript-74d079ef5a6e
