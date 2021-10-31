@@ -68,8 +68,8 @@ function promptPassword() {
     return
   }
 
-  else if (passwordLength > 126) {
-    window.prompt("password can't be longer than 126 characters")
+  else if (passwordLength > 128) {
+    window.prompt("password can't be longer than 128 characters")
     return
   }
 
